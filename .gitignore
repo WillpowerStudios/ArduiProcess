@@ -2,3 +2,5 @@
 *.class
 
 build-tmp/source/ArduiProcess.java
+
+Processing/build-tmp/source/Processing.java
