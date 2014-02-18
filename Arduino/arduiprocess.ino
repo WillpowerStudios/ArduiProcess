@@ -2,7 +2,7 @@
    
    created 3 Nov 2008
    by David A. Mellis
-   modified 30 Aug 2011
+   modified Feb 18 2014
    by WillPower
 
    Connect different sensors to Arduino Board
