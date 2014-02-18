@@ -24,7 +24,7 @@
 
 // this constant won't change.  It's the pin number
 // of the sensor's output:
-const int pingPin01 = 8;
+const int pingPin01 = 7;
 const int pingPin02 = 4;
 
 void setup() {
