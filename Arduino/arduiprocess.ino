@@ -1,15 +1,44 @@
-/* ArduiProcess
+/* Ping))) Sensor
+  
+   This sketch reads a PING))) ultrasonic rangefinder and returns the
+   distance to the closest object in range. To do this, it sends a pulse
+   to the sensor to initiate a reading, then listens for a pulse 
+   to return.  The length of the returning pulse is proportional to 
+   the distance of the object from the sensor.
+     
+   The circuit:
+    * +V connection of the PING))) attached to +5V
+    * GND connection of the PING))) attached to ground
+    * SIG connection of the PING))) attached to digital pin 7
+
+   http://www.arduino.cc/en/Tutorial/Ping
    
    created 3 Nov 2008
    by David A. Mellis
-   modified Feb 18 2014
-   by WillPower
-
-   Connect different sensors to Arduino Board
+   modified 30 Aug 2011
+   by Tom Igoe
  
    This example code is in the public domain.
 
  */
+ 
+ 
+ 
+ // knock
+ 
+// these constants won't change:
+
+const int knockSensor = A0; // the piezo is connected to analog pin 0
+const int threshold = 150;  // threshold value to decide when the detected sound is a knock or not
+
+
+// these variables will change:
+int sensorReading = 0;      // variable to store the value read from the sensor pin
+
+
+ 
+ 
+ // ping
 
 // this constant won't change.  It's the pin number
 // of the sensor's output:
@@ -35,24 +64,66 @@ void loop()
   digitalWrite(pingPin01, HIGH);
   delayMicroseconds(5);
   digitalWrite(pingPin01, LOW);
-
+  
+  //
+  
   // The same pin is used to read the signal from the PING))): a HIGH
   // pulse whose duration is the time (in microseconds) from the sending
   // of the ping to the reception of its echo off of an object.
   pinMode(pingPin01, INPUT);
   duration = pulseIn(pingPin01, HIGH);
+  
+  // convert the time into a distance
+  inches = microsecondsToInches(duration);
+  cm = microsecondsToCentimeters(duration);
+
+  Serial.print("c1:");
+  Serial.println(cm);
+
+  ///
+  
+  
+  pinMode(pingPin02, OUTPUT);
+  digitalWrite(pingPin02, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin02, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin02, LOW);
+
+  
+  
+  pinMode(pingPin02, INPUT);
+  duration = pulseIn(pingPin02, HIGH);
 
   // convert the time into a distance
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
   
+    Serial.print("c2:");
+  Serial.println(cm);
+
+  
   //Serial.print(inches);
   //Serial.print("in, ");
-  Serial.print(cm);
+ Serial.print(cm);
   //Serial.print("cm");
   Serial.println();
   
   delay(100);
+  
+  
+  
+  ///// KNOCK / FLASH
+   // read the sensor and store it in the variable sensorReading:
+  sensorReading = analogRead(knockSensor);    
+  
+  // if the sensor reading is greater than the threshold:
+  if (sensorReading >= threshold) {
+
+    // send the string "Knock!" back to the computer, followed by newline
+    Serial.println("Flash!");         
+  }
+  delay(100);  // delay to avoid overloading the serial port buffer
 }
 
 long microsecondsToInches(long microseconds)
@@ -72,4 +143,3 @@ long microsecondsToCentimeters(long microseconds)
   // object we take half of the distance travelled.
   return microseconds / 29 / 2;
 }
-

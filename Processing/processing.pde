@@ -1,4 +1,4 @@
-/* ArduiProcess
+/* ArduiProcess -- PROCESSING
    
    created 3 Nov 2008
    by David A. Mellis
