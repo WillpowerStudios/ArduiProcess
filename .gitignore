@@ -1,0 +1,4 @@
+
+*.class
+
+build-tmp/source/ArduiProcess.java
