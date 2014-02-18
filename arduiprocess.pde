@@ -1,3 +1,17 @@
+/* ArduiProcess
+   
+   created 3 Nov 2008
+   by David A. Mellis
+   modified 30 Aug 2011
+   by WillPower
+
+   Basic UltraSound - Arduino 
+   The farther my hand it the bigger the circle
+ 
+   This example code is in the public domain.
+
+ */
+  
 import processing.serial.*;
 import cc.arduino.*;
 
