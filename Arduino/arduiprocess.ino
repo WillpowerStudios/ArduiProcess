@@ -1,8 +1,6 @@
 /* ArduiProcess -- PROCESSING
    
-   created 3 Nov 2008
-   by David A. Mellis
-   modified 30 Aug 2011
+   Created 30 Aug 2011
    by WillPower
 
    Basic UltraSound - Arduino 
@@ -18,7 +16,7 @@
  
 // these constants won't change:
 
-const int knockSensor = A0; // the piezo is connected to analog pin 0
+const int knockSensor = A1; // the piezo is connected to analog pin 0
 const int threshold = 150;  // threshold value to decide when the detected sound is a knock or not
 
 
@@ -67,8 +65,8 @@ void loop()
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
 
-  Serial.print("c1:");
-  Serial.println(cm);
+  //Serial.print("c1:");
+  //Serial.println(cm);
 
   ///
   
@@ -111,7 +109,7 @@ void loop()
   if (sensorReading >= threshold) {
 
     // send the string "Knock!" back to the computer, followed by newline
-    Serial.println("Flash!");         
+    //Serial.println("Flash!");         
   }
   delay(100);  // delay to avoid overloading the serial port buffer
 }

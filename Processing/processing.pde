@@ -1,8 +1,6 @@
 /* ArduiProcess -- PROCESSING
    
-   created 3 Nov 2008
-   by David A. Mellis
-   modified 30 Aug 2011
+   created 30 Aug 2011
    by WillPower
 
    Basic UltraSound - Arduino 
