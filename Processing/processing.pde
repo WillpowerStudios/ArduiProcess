@@ -14,12 +14,11 @@ import processing.serial.*;
 import cc.arduino.*;
 
 Serial myPort;  // Create object from Serial class
-int val;     // Data received from the serial port
+int dist01,dist02;     // Data received from the serial port
 String valu;
-float howBig;
-
-
+float howBig01,howBig02;
 PFont mono;
+
 
 void setup() {
   size( 800,800 );
@@ -27,69 +26,66 @@ void setup() {
   smooth();
   cursor( CROSS );
   
-  String portName = Serial.list()[2]; //change the 0 to a 1 or 2 etc. to match your port
-  myPort = new Serial(this, portName, 9600);
-  
-  
-
-  
+  // List all the available serial ports:
+  println(Serial.list());
+  //change the 0 to a 1 or 2 etc. to match your port
+  String portName = Serial.list()[2]; 
+  myPort = new Serial(this, portName, 9600);  
+  // don't generate a serialEvent() until you get a newline character:
+  myPort.bufferUntil('\n');
 }
+
 
 void draw() {
   
-  fill( 0,21 );
+  fill( 0,11 );
   rect( 0,0,width,height);
   
-  if ( myPort.available() > 0) 
-  {  // If data is available,
-  //val = myPort.read();
-  valu = myPort.readStringUntil('\n');   // read it and store it in val
-  
+  if ( myPort.available() > 0) {  // If data is available,
+    //dist01 = myPort.read();
+    valu = myPort.readStringUntil('\n');   // read it and store it in val 
+
     //println(valu);
-   if(valu != null)
-    val = int(trim(valu));
-    println( val );
-} 
- 
+    if(valu != null) {
+     //dist01 = int(trim(valu));
+
+    if(valu.indexOf("c1:") != -1) 
+      dist01 = int(trim(valu.substring(3)));
+      println("yo");
+      println(dist01);
+
+
+    if(valu.indexOf("c2:") != -1)
+      dist02 = int(trim(valu.substring(3)));
+      println("it works !");
+      println(dist02);
+
+    //println( valu );
+
+    }
     
+  }
+
   noStroke();
+
+  howBig01 = dist01 * 2.5;
   
-  if ( val > 1 ) howBig = 1;
-  if ( val > 10 ) howBig = 20;
-  if ( val > 20 ) howBig = 40;
-  if ( val > 30 ) howBig = 60;
-  if ( val > 40 ) howBig = 80;
-  if ( val > 50 ) howBig = 100;
-  if ( val > 60 ) howBig = 120;
-  if ( val > 70 ) howBig = 140;
-  if ( val > 80 ) howBig = 160;
-  if ( val > 90 ) howBig = 180;
-  if ( val > 100 ) howBig = 200;
-  if ( val > 110 ) howBig = 220;
-  if ( val > 120 ) howBig = 240;
-  if ( val > 130 ) howBig = 260;
-  if ( val > 140 ) howBig = 280;
-  if ( val > 150 ) howBig = 300;
-  if ( val > 160 ) howBig = 320;
-  if ( val > 170 ) howBig = 340;
-  if ( val > 180 ) howBig = 360;
-  if ( val > 190 ) howBig = 380;
-  if ( val > 200 ) howBig = 400;
-  if ( val > 210 ) howBig = 600;
-  
-  fill( #02F2F0 );
-  ellipse( width/2,height/2,howBig,howBig );
+  fill( #02F2F0,100 );
+  ellipse( width/2,height/2,howBig01,howBig01 );
+
+  ////
+
+  howBig02 = dist02 * 2.5;
+
+  fill( #ff004f,100 );
+  ellipse( width/2,height/2,howBig02,howBig02 );
   
   //println( val ); //print it out in the console
   //println( valu ); //print it out in the console
   
-  
-  
   fill( 255 );
   textSize(27);
-  text( val,10,30 );
+  text( dist01,10,30 );
+  text( dist02,100,30 );
   
-  
- }
- 
- 
+ } 
