@@ -17,7 +17,7 @@
 // these constants won't change:
 
 const int knockSensor = A1; // the piezo is connected to analog pin 0
-const int threshold = 150;  // threshold value to decide when the detected sound is a knock or not
+const int threshold = 150;  // threshold value to     decide when the detected sound is a knock or not
 const int micro = A0;
 
 // these variables will change:

@@ -54,7 +54,6 @@ void draw() {
       println("yo");
       println(dist01);
 
-
     if(valu.indexOf("c2:") != -1)
       dist02 = int(trim(valu.substring(3)));
       println("it works !");
